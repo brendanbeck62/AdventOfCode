@@ -1,6 +1,5 @@
 import os
 import re
-import math
 
 def part1(in_str):
     """Generate a set of every coordinate that is adjacent to a symbol.
