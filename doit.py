@@ -32,6 +32,7 @@ if __name__ == "__main__":
 
     # create python script from template
     shutil.copy2('./template.py', f"{day_path}/day-{day}.py")
+    open(f"{day_path}/example1.txt", 'a').close()
 
     # download input
     ssl._create_default_https_context = ssl._create_unverified_context
