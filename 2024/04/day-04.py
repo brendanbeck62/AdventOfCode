@@ -87,12 +87,6 @@ def part2(in_str):
     for line in in_str.split('\n'):
         if not line: continue
         board.append(line)
-    """
-    Same as part 1:
-    - find an A
-    - find each M Surrounding (only need to check 4 corners)
-    - based on the direction traveled from the A to the M, go the other way and check for an S
-    """
 
     xmas_count = 0
     for loopy in range(len(board)):
