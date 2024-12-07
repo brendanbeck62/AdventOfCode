@@ -14,9 +14,9 @@ def part2(in_str):
         pass
     return
 
-FILE = "example1.txt"
-#FILE = "example2.txt"
-#FILE = "in.txt"
+FILE = f"{os.path.dirname(__file__)}/example1.txt"
+#FILE = f"{os.path.dirname(__file__)}/example2.txt"
+#FILE = f"{os.path.dirname(__file__)}/in.txt"
 
 with open(FILE, 'r') as f:
     in_str = f.read()
