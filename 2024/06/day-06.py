@@ -60,7 +60,7 @@ def part1(in_str):
     for line in in_str.split('\n'):
         if not line: continue
         board.append(list(line))
-    visited = patrol(board)
+    _, visited, _ = patrol(board)
     if VIS:print('\n'*len(board))
     return len(visited)
 
@@ -150,8 +150,8 @@ with open(FILE, 'r') as f:
 print("============================================================")
 print("                        PART 1")
 print("============================================================")
-#print('Part 1: ', part1(in_str))
+print('Part 1: ', part1(in_str))
 print("============================================================")
 print("                        PART 2")
 print("============================================================")
-print('Part 2:', part2(in_str))
+#print('Part 2:', part2(in_str))
