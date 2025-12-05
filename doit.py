@@ -4,20 +4,28 @@ from datetime import datetime
 import argparse
 import requests
 import ssl
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 def get_args():
     parser = argparse.ArgumentParser(
                     prog='doig',
                     description='generates folder structure for AoC and pulls down input file if it exists')
-    parser.add_argument('-s', '--session_id', required=True, help='session token from advent of code. (sign in, application > cookies)')
+    parser.add_argument('-s', '--session-id', help='session token from advent of code. (sign in, application > cookies)')
     parser.add_argument('-y', '--year', help='format: 2024. create year [default = this year]')
     parser.add_argument('-d', '--day', help='format: 01. create day [default = today]')
     return parser.parse_args()
 
 if __name__ == "__main__":
     args = get_args()
+
+    # Prioritize argparse, then fall back to .env, then exit if neither set
+    session_id = args.session_id or os.getenv('SESSION_ID')
+
+    if not session_id:
+        print("Error: session_id must be set via --session-id argument or SESSION_ID environment variable")
+        exit(1)
 
     # create folder for year
     year = args.year if args.year else datetime.today().strftime('%Y')
@@ -37,8 +45,8 @@ if __name__ == "__main__":
     # download input
     ssl._create_default_https_context = ssl._create_unverified_context
     headers = {
-		"cookie": f"session={args.session_id}"
-	}
+        "cookie": f"session={session_id}"
+    }
     res = requests.get(f"https://adventofcode.com/{year}/day/{day.lstrip("0")}/input", headers=headers)
     with open(f"{day_path}/in.txt", 'w+') as f:
         f.write(res.text.removesuffix("\n"))
